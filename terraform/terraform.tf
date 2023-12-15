@@ -6,10 +6,10 @@ terraform {
   required_version = ">= 1.5.6"
 
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "=5.14.0"
-    }
+    # aws = {
+    #   source  = "hashicorp/aws"
+    #   version = "=5.14.0"
+    # }
     azuread = {
       source  = "hashicorp/azuread"
       version = "=2.41.0"
@@ -18,10 +18,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "=3.71.0"
     }
-    google = {
-      source  = "hashicorp/google"
-      version = "=4.79.0"
-    }
+    # google = {
+    #   source  = "hashicorp/google"
+    #   version = "=4.79.0"
+    # }
     random = {
       source  = "hashicorp/random"
       version = "=3.5.1"

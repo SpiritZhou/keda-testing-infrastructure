@@ -10,63 +10,63 @@ locals {
 
 // ====== GRAFANA CLOUD =======
 
-module "grafana_cloud" {
-  source = "./modules/grafana/iam"
-  slug   = var.grafana_slug
-}
+# module "grafana_cloud" {
+#   source = "./modules/grafana/iam"
+#   slug   = var.grafana_slug
+# }
 
 // ====== GCP ======
 
-module "gcp_apis" {
-  source = "./modules/gcp/apis"
-  apis_to_enable = [
-    "appengine.googleapis.com",
-    "cloudresourcemanager.googleapis.com",
-    "cloudtasks.googleapis.com",
-    "iam.googleapis.com",
-    "iamcredentials.googleapis.com",
-    "monitoring.googleapis.com",
-    "pubsub.googleapis.com",
-    "serviceusage.googleapis.com",
-    "sts.googleapis.com",
-    "secretmanager.googleapis.com",
-  ]
-}
+# module "gcp_apis" {
+#   source = "./modules/gcp/apis"
+#   apis_to_enable = [
+#     "appengine.googleapis.com",
+#     "cloudresourcemanager.googleapis.com",
+#     "cloudtasks.googleapis.com",
+#     "iam.googleapis.com",
+#     "iamcredentials.googleapis.com",
+#     "monitoring.googleapis.com",
+#     "pubsub.googleapis.com",
+#     "serviceusage.googleapis.com",
+#     "sts.googleapis.com",
+#     "secretmanager.googleapis.com",
+#   ]
+# }
 
-module "gcp_iam" {
-  source = "./modules/gcp/iam"
-  identity_providers = [
-    {
-      provider_name   = module.azure_aks_pr.cluster_full_name
-      oidc_issuer_url = module.azure_aks_pr.oidc_issuer_url
-    },
-    {
-      provider_name   = module.azure_aks_nightly.cluster_full_name
-      oidc_issuer_url = module.azure_aks_nightly.oidc_issuer_url
-    },
-  ]
-}
+# module "gcp_iam" {
+#   source = "./modules/gcp/iam"
+#   identity_providers = [
+#     {
+#       provider_name   = module.azure_aks_pr.cluster_full_name
+#       oidc_issuer_url = module.azure_aks_pr.oidc_issuer_url
+#     },
+#     {
+#       provider_name   = module.azure_aks_nightly.cluster_full_name
+#       oidc_issuer_url = module.azure_aks_nightly.oidc_issuer_url
+#     },
+#   ]
+# }
 
 
 // ====== AWS ======
 
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
+# data "aws_region" "current" {}
+# data "aws_caller_identity" "current" {}
 
-module "aws_iam" {
-  source = "./modules/aws/iam"
-  tags   = local.tags
-  identity_providers = [
-    {
-      role_name       = "${module.azure_aks_pr.cluster_full_name}-role"
-      oidc_issuer_url = module.azure_aks_pr.oidc_issuer_url
-    },
-    {
-      role_name       = "${module.azure_aks_nightly.cluster_full_name}-role"
-      oidc_issuer_url = module.azure_aks_nightly.oidc_issuer_url
-    },
-  ]
-}
+# module "aws_iam" {
+#   source = "./modules/aws/iam"
+#   tags   = local.tags
+#   identity_providers = [
+#     {
+#       role_name       = "${module.azure_aks_pr.cluster_full_name}-role"
+#       oidc_issuer_url = module.azure_aks_pr.oidc_issuer_url
+#     },
+#     {
+#       role_name       = "${module.azure_aks_nightly.cluster_full_name}-role"
+#       oidc_issuer_url = module.azure_aks_nightly.oidc_issuer_url
+#     },
+#   ]
+# }
 
 // ====== AZURE ======
 
@@ -327,60 +327,60 @@ module "github_secrets" {
       name  = "TF_AZURE_KEYVAULT_URI"
       value = module.azure_key_vault.vault_uri
     },
-    {
-      name  = "TF_AWS_ACCESS_KEY"
-      value = module.aws_iam.e2e_user_access_key
-    },
-    {
-      name  = "TF_AWS_SECRET_KEY"
-      value = module.aws_iam.e2e_user_secret_key
-    },
-    {
-      name  = "TF_AWS_REGION"
-      value = data.aws_region.current.name
-    },
-    {
-      name  = "TF_AWS_ACCOUNT_ID"
-      value = data.aws_caller_identity.current.account_id
-    },
-    {
-      name  = "TF_AWS_WORKLOAD_ROLE"
-      value = module.aws_iam.workload_role_arn
-    },
-    {
-      name  = "TF_GCP_SA_CREDENTIALS"
-      value = module.gcp_iam.e2e_user_credentials
-    },
-    {
-      name  = "TF_GCP_SA_EMAIL"
-      value = module.gcp_iam.e2e_user_email
-    },
-    {
-      name  = "TF_GCP_PROJECT_NUMBER"
-      value = module.gcp_iam.project_number
-    },
-    {
-      name  = "TF_AZURE_RABBIT_API_APPLICATION_ID"
-      value = module.azure_rabbitmq_app_registration.application_id
-    },
+    # {
+    #   name  = "TF_AWS_ACCESS_KEY"
+    #   value = module.aws_iam.e2e_user_access_key
+    # },
+    # {
+    #   name  = "TF_AWS_SECRET_KEY"
+    #   value = module.aws_iam.e2e_user_secret_key
+    # },
+    # {
+    #   name  = "TF_AWS_REGION"
+    #   value = data.aws_region.current.name
+    # },
+    # {
+    #   name  = "TF_AWS_ACCOUNT_ID"
+    #   value = data.aws_caller_identity.current.account_id
+    # },
+    # {
+    #   name  = "TF_AWS_WORKLOAD_ROLE"
+    #   value = module.aws_iam.workload_role_arn
+    # },
+    # {
+    #   name  = "TF_GCP_SA_CREDENTIALS"
+    #   value = module.gcp_iam.e2e_user_credentials
+    # },
+    # {
+    #   name  = "TF_GCP_SA_EMAIL"
+    #   value = module.gcp_iam.e2e_user_email
+    # },
+    # {
+    #   name  = "TF_GCP_PROJECT_NUMBER"
+    #   value = module.gcp_iam.project_number
+    # },
+    # {
+    #   name  = "TF_AZURE_RABBIT_API_APPLICATION_ID"
+    #   value = module.azure_rabbitmq_app_registration.application_id
+    # },
   ]
 }
 
-module "github__performance_secrets" {
-  source     = "./modules/github/secrets"
-  repository = var.performance_repository
-  secrets = [
-    {
-      name  = "TF_GRAFANA_PROMETHEUS_URL"
-      value = module.grafana_cloud.prometheus_url
-    },
-    {
-      name  = "TF_GRAFANA_PROMETHEUS_USER"
-      value = module.grafana_cloud.prometheus_user
-    },
-    {
-      name  = "TF_GRAFANA_PROMETHEUS_PASSWORD"
-      value = module.grafana_cloud.prometheus_password
-    },
-  ]
-}
+# module "github__performance_secrets" {
+#   source     = "./modules/github/secrets"
+#   repository = var.performance_repository
+#   secrets = [
+#     {
+#       name  = "TF_GRAFANA_PROMETHEUS_URL"
+#       value = module.grafana_cloud.prometheus_url
+#     },
+#     {
+#       name  = "TF_GRAFANA_PROMETHEUS_USER"
+#       value = module.grafana_cloud.prometheus_user
+#     },
+#     {
+#       name  = "TF_GRAFANA_PROMETHEUS_PASSWORD"
+#       value = module.grafana_cloud.prometheus_password
+#     },
+#   ]
+# }
