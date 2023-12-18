@@ -17,6 +17,8 @@ resource "random_uuid" "app_roles" {
 
 resource "random_uuid" "app_scope" {}
 
+data "azuread_client_config" "current" {}
+
 resource "azuread_application" "oauth2_api" {
 
   display_name = "${local.application_name} OAuth2 API tokens app ${var.application_purpose}"
@@ -24,18 +26,23 @@ resource "azuread_application" "oauth2_api" {
   api {
     mapped_claims_enabled          = true
     requested_access_token_version = 2
+    # oauth2_permission_scope {
+    #   id                         = random_uuid.app_scope.id
+    #   admin_consent_description  = "Dummy text for dummy application"
+    #   admin_consent_display_name = "Dummy text for dummy application"
+    #   enabled                    = true
+    #   type                       = "User"
+    #   user_consent_description   = "Dummy text for dummy application"
+    #   user_consent_display_name  = "Dummy text for dummy application"
+    #   value                      = "access"
+    # }
+   }
+   
 
-    oauth2_permission_scope {
-      id                         = random_uuid.app_scope.id
-      admin_consent_description  = "Dummy text for dummy application"
-      admin_consent_display_name = "Dummy text for dummy application"
-      enabled                    = true
-      type                       = "User"
-      user_consent_description   = "Dummy text for dummy application"
-      user_consent_display_name  = "Dummy text for dummy application"
-      value                      = "access"
+    feature_tags {
+      enterprise = true
+      gallery    = true
     }
-  }
 
   # identifier_uris = [local.application_identifier]
 
