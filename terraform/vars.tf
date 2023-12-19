@@ -5,7 +5,7 @@ variable "azure_resource_group_name" {
 }
 
 variable "unique_project_name" {
-  default     = "keda-internal"
+  default     = "kedainternal"
   type        = string
   description = "Value to make unique every resource name generated"
 }
