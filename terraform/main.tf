@@ -226,24 +226,24 @@ module "azure_storage_account" {
   tags = local.tags
 }
 
-module "azure_rabbitmq_app_registration" {
-  source              = "./modules/azure/app-registration"
-  unique_project_name = var.unique_project_name
-  application_purpose = "rabbitmq-oauth"
-  # list of roles to create in application - see https://www.rabbitmq.com/oauth2.html#scope-and-tags
-  app_roles = {
-    management    = "rabbitmq.tag:management"
-    administrator = "rabbitmq.tag:administrator"
-    read_all      = "rabbitmq.read:*/*/*"
-    write_all     = "rabbitmq.write:*/*/*"
-    configure_all = "rabbitmq.configure:*/*/*"
-  }
+# module "azure_rabbitmq_app_registration" {
+#   source              = "./modules/azure/app-registration"
+#   unique_project_name = var.unique_project_name
+#   application_purpose = "rabbitmq-oauth"
+#   # list of roles to create in application - see https://www.rabbitmq.com/oauth2.html#scope-and-tags
+#   app_roles = {
+#     management    = "rabbitmq.tag:management"
+#     administrator = "rabbitmq.tag:administrator"
+#     read_all      = "rabbitmq.read:*/*/*"
+#     write_all     = "rabbitmq.write:*/*/*"
+#     configure_all = "rabbitmq.configure:*/*/*"
+#   }
 
-  access_identities = [
-    module.azuread_applications.identity_1,
-    module.azuread_applications.identity_2
-  ]
-}
+#   access_identities = [
+#     module.azuread_applications.identity_1,
+#     module.azuread_applications.identity_2
+#   ]
+# }
 
 // ====== GITHUB SECRETS ======
 
