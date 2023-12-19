@@ -5,13 +5,13 @@ variable "azure_resource_group_name" {
 }
 
 variable "unique_project_name" {
-  default     = "kedatry"
+  default     = "keda-internal"
   type        = string
   description = "Value to make unique every resource name generated"
 }
 
 variable "repository" {
-  default     = "kedacore/keda"
+  default     = "SpiritZhou/keda"
   type        = string
   description = "Repository where secrets will be created/updated"
 }

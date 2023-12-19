@@ -359,10 +359,10 @@ module "github_secrets" {
     #   name  = "TF_GCP_PROJECT_NUMBER"
     #   value = module.gcp_iam.project_number
     # },
-    {
-      name  = "TF_AZURE_RABBIT_API_APPLICATION_ID"
-      value = module.azure_rabbitmq_app_registration.application_id
-    },
+    # {
+    #   name  = "TF_AZURE_RABBIT_API_APPLICATION_ID"
+    #   value = module.azure_rabbitmq_app_registration.application_id
+    # },
   ]
 }
 
