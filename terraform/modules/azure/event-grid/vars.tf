@@ -8,6 +8,11 @@ variable "unique_project_name" {
   description = "Value to make unique every resource name generated"
 }
 
+variable "service_bus_topic_id" {
+  type        = string
+  description = "Service bus topic to subscription events"
+}
+
 variable "tags" {
   type        = map(any)
   description = "Tags to apply on every resource"

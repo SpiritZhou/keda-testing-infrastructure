@@ -23,7 +23,7 @@ resource "azurerm_eventgrid_event_subscription" "eventsubscription" {
   name  = local.event_grid_subscription_name
   scope = data.azurerm_resource_group.rg.id
 
-  service_bus_topic_endpoint_id = module.azurerm_servicebus_topic.id
+  service_bus_topic_endpoint_id = var.service_bus_topic_id 
 }
 
 resource "azurerm_role_assignment" "roles" {
