@@ -327,6 +327,14 @@ module "github_secrets" {
       name  = "TF_AZURE_KEYVAULT_URI"
       value = module.azure_key_vault.vault_uri
     },
+    {
+      name  = "TF_AZURE_EVENT_GRID"
+      value = module.azurerm_eventgrid_topic.eventgrid.endpoint
+    },
+    {
+      name  = "TF_AZURE_EVENT_GRID_KEY"
+      value = module.azurerm_eventgrid_topic.eventgrid.primary_access_key
+    },
     # {
     #   name  = "TF_AWS_ACCESS_KEY"
     #   value = module.aws_iam.e2e_user_access_key
