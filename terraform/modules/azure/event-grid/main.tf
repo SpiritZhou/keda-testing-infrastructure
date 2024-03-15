@@ -24,7 +24,7 @@ resource "azurerm_eventgrid_event_subscription" "eventsubscription" {
   scope = azurerm_eventgrid_topic.eventgrid.id
   event_delivery_schema = "CloudEventSchemaV1_0"
 
-  service_bus_topic_endpoint_id = "/subscriptions/66a7fcba-dac3-46d8-b509-202f305618c8/resourceGroups/keda-e2e-infrastructure-retry/providers/Microsoft.ServiceBus/namespaces/kedaretry2-e2e-servicebus-namespace-event-grid/topics/kedaretry2-e2e-receive-event-grid-topic"
+  service_bus_topic_endpoint_id = var.service_bus_topic_id
 }
 
 resource "azurerm_role_assignment" "roles" {
