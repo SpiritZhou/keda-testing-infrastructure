@@ -356,6 +356,10 @@ module "github_secrets" {
       name  = "TF_AZURE_EVENT_GRID_KEY"
       value = module.azurerm_eventgrid_topic.key
     },
+    {
+      name  = "TF_AZURE_SB_EVENT_GRID_RECEIVE_TOPIC"
+      value = module.azure_servicebus_namespace_event_grid.event_grid_receive_topic
+    },
     # {
     #   name  = "TF_AWS_ACCESS_KEY"
     #   value = module.aws_iam.e2e_user_access_key
