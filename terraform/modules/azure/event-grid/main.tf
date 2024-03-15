@@ -24,6 +24,7 @@ resource "azurerm_eventgrid_event_subscription" "eventsubscription" {
   scope = azurerm_eventgrid_topic.eventgrid.id
   event_delivery_schema = "CloudEventSchemaV1_0"
 
+
   service_bus_topic_endpoint_id = var.service_bus_topic_id
 }
 
