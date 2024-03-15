@@ -16,6 +16,8 @@ resource "azurerm_eventgrid_topic" "eventgrid" {
   name                = local.event_grid_name
   location            = data.azurerm_resource_group.rg.location
   resource_group_name = data.azurerm_resource_group.rg.name
+  input_schema = "CloudEventSchemaV1_0"
+
   tags = var.tags
 }
 
@@ -23,7 +25,6 @@ resource "azurerm_eventgrid_event_subscription" "eventsubscription" {
   name  = local.event_grid_subscription_name
   scope = azurerm_eventgrid_topic.eventgrid.id
   event_delivery_schema = "CloudEventSchemaV1_0"
-
 
   service_bus_topic_endpoint_id = var.service_bus_topic_id
 }
