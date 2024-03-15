@@ -309,6 +309,10 @@ module "github_secrets" {
       value = module.azure_servicebus_namespace_alternative.connection_string
     },
     {
+      name  = "TF_AZURE_SERVICE_BUS_EVENTGRID_CONNECTION_STRING"
+      value = module.azure_servicebus_namespace_event_grid.connection_string
+    },
+    {
       name  = "TF_AZURE_DATA_EXPLORER_DB"
       value = module.azure_data_explorer.database
     },
